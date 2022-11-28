@@ -1,1 +1,1 @@
-# This is my console application for labaratory work №5 with Unit-tests.
+# This is my console application for labaratory work №5 with Unit-tests .
