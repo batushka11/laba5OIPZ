@@ -8,23 +8,23 @@ namespace UnitTest1
 	TEST_CLASS(UnitTest1)
 	{
 	public:
-		
+
 		TEST_METHOD(TestMethod1)
 		{
 			double a = 2;
-			double x = 1;
-			double expected = 1.5;
-			double actual = calc(a,x);
+			double n = 4;
+			double expected = 6.85;
+			double actual = calc(a, n);
 			Assert::AreEqual(expected, actual);
 		}
-	
+
 	public:
 		TEST_METHOD(TestMethod2)
 		{
-			double a = 4;
-			double x = -3;
-			double expected = -2.5;
-			double actual = calc(a, x);
+			double a = -3;
+			double n = 7;
+			double expected = -4.35;
+			double actual = calc(a, n);
 			Assert::AreEqual(expected, actual);
 		}
 	public:
@@ -32,9 +32,9 @@ namespace UnitTest1
 		TEST_METHOD(TestMethod3)
 		{
 			double a = 8;
-			double x = 3;
+			double n = 3;
 			double expected = 150;
-			double actual = calc(a, x);
+			double actual = calc(a, n);
 			Assert::AreEqual(expected, actual);
 		}
 
