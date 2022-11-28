@@ -9,7 +9,7 @@ namespace UnitTest1
 	{
 	public:
 
-		TEST_METHOD(TestMethod1)
+		TEST_METHOD(TestMethod1 )
 		{
 			double a = 2;
 			double n = 4;
