@@ -4,26 +4,26 @@
 #include <cmath>
 #include <windows.h>
 using namespace std;
-void checkValidParams(double a, double x) // перевірка відповідності значення Х та А
+void checkValidParams(double n, double a) // перевірка відповідності значення Х1 та N
 {
-    if (x <= 0)
+    if (a <= 0)
     {
-        if (a < 3)
+        if (n < 3)
         {
-            throw "Input correct data interval start";
+            throw "Input correct n>3";
         }
     }
     else
     {
-        if (a < 2)
+        if (n < 2)
         {
-            throw "Input correct interval start";
+            throw "Input correct n>2";
         }
     }
 }
-void checkB(double a, double b) // перевірка заданих границь визначення 
+void checkB(double x1, double x2) // перевірка заданих границь визначення 
 {
-    if (b < a)
+    if (x2 < x1)
     {
         throw "Input correct  interval end ";
     }
@@ -42,16 +42,16 @@ void checkValidParams(double k) // перевірка правильності �
         throw "Input correct data 1 or 0 to write to file or no";
     }
 }
-double calc(double a, double x) // функція обчислення значення У
+double calc(double a, double n) // функція обчислення значення У
 {
     double y;
-    if (x <= 0) // функція обчислення значення У для х<=0
+    if (a <= 0) // функція обчислення значення У для х<=0
     {
         y = 0;
         int i = 2;
-        while (i <= (a - 1))
+        while (i <= (n - 1))
         {
-            y += x / i;
+            y += a / i;
             i = i + 1;
         }
     }
@@ -59,13 +59,13 @@ double calc(double a, double x) // функція обчислення знач�
     {
         y = 0;
         int i = 0;
-        while (i <= (a - 1))
+        while (i <= (n - 1))
         {
             double s = 0;
             int j = 0;
             while (j <= i)
             {
-                s += i / (j + x);
+                s += i / (j + a);
                 j = j + 1;
             }
             y = y + s;
@@ -74,28 +74,30 @@ double calc(double a, double x) // функція обчислення знач�
     }
     return y;
 }
-void printresult(double a, double b, int h, double x, double k) // функція виведення результату
+void printresult(double a, double b, int h, double n, double k) // функція виведення результату
 {
+    int krok = 1;
     if (k == 1)// перевірка чи потрібно робити записати результати в файл
     {
         ofstream fout("test.txt", ios::app);
-        fout << "Result is :" << endl;
+        fout << "\nResult is :" << endl;
         fout.close();
     }
     for (a; a <= b; a += h) // виведення результату в залежності від кількості кроків
     {
-        cout << "a = " << a << " " << "b = " << b << " " << "y = " << calc(a, x) << endl;
+        cout << "\nStep " << krok << "\n" << "x = " << a << " " << "y = " << calc(a, n) << endl;
         if (k == 1)
         {
             ofstream fout("test.txt", ios::app);
-            fout << "a = " << a << " " << "b = " << b << " " << "y = " << calc(a, x) << endl;
+            fout << "\nStep " << krok << "\n" << "x = " << a << " " << "y = " << calc(a, n) << endl;
             fout.close();
         }
+        krok += 1;
     }
 }
 int main()
 {
-    double a, b, x, k;
+    double a, b, n, k;
     int h;
 
     try
@@ -107,7 +109,7 @@ int main()
 
         cout << "Thank you! You can input data" << endl;
 
-        cout << endl << "Enter x n the first line . In the second line the interval from a to b . In the third, indicate the step . " << endl;
+        cout << endl << "Enter n in the first line . In the second line the interval from a to b . In the third, indicate the step . " << endl;
         cout << "In the fourth line, enter 1 if you want to write to the file and 0 if you don't" << endl << "Then press CTRL+S to save the file" << endl;
 
 
@@ -115,9 +117,9 @@ int main()
 
         Sleep(20000);// Надаємо користувачу 20 сек на те , щоб прочитати вимоги та ввести данні
         ifstream in("input.txt");
-        in >> x;
+        in >> n;
         in >> a >> b;
-        checkValidParams(a, x);
+        checkValidParams(n, a);
         checkB(a, b);
         in >> h;
         checkValid(h);
@@ -139,10 +141,11 @@ int main()
     }
     if (true)
     {
-        printresult(a, b, h, x, k);
+        printresult(a, b, h, n, k);
         return 0;
     }
 }
+
             
 
 
